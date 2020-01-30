@@ -1,16 +1,5 @@
-<div class="row mt-4">
-  <div class="col-md-6">
-    <div class="row" style="height: 450px;">
-      <div class="col-md-12 my-auto side-header">
-        <img src="/assets/img/add_user.png" class="mx-auto d-block">
-        <h1>User Registration</h1>
-        <p><em>-Using <strong>Asp.Net Core Web API</strong> and <strong>Angular 7</strong></em></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
     <form [formGroup] = "userService.formModel" autocomplete="off" (submit)="onSubmit()">
-      <div class="form-group">
+      <div class="form-group required">
         <label>Username</label>
         <input class="form-control" formControlName= "UserName">
         <label class="text-danger" *ngIf="userService.formModel.get('UserName').touched && userService.formModel.get('UserName').hasError('required')">This field is mandatory.</label>
@@ -25,13 +14,13 @@
         <input class="form-control" formControlName= "FullName">
       </div>
       <div formGroupName="Passwords">
-        <div class="form-group">
+        <div class="form-group required">
           <label>Password</label>
           <input type="password" class="form-control" formControlName= "Password">
           <label class="text-danger" *ngIf="userService.formModel.get('Passwords.Password').touched && userService.formModel.get('Passwords.Password').hasError('required')">This field is mandatory.</label>
           <label class="text-danger" *ngIf="userService.formModel.get('Passwords.Password').touched && userService.formModel.get('Passwords.Password').hasError('minlength')">Minimum 4 characters required.</label>
         </div>
-        <div class="form-group">
+        <div class="form-group required">
           <label>ConfirmPassword</label>
           <input type="password" class="form-control" formControlName= "ConfirmPassword">
           <label class="text-danger" *ngIf="userService.formModel.get('Passwords.ConfirmPassword').touched && userService.formModel.get('Passwords.ConfirmPassword').hasError('required')">This field is mandatory.</label>
@@ -44,5 +33,3 @@
         </div>
       </div>
     </form>
-  </div>
-</div>

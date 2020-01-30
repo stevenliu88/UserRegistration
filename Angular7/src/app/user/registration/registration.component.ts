@@ -8,12 +8,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  constructor(public userService: UserService, private toastr: ToastrService) {}
 
-  constructor(public userService: UserService, private toastr: ToastrService) { }
-
-  ngOnInit() {
-  }
-  onSubmit(){
+  ngOnInit() {}
+  onSubmit() {
     this.userService.register().subscribe(
       (res: any) => {
         if (res.succeeded) {
@@ -21,21 +19,24 @@ export class RegistrationComponent implements OnInit {
           this.toastr.success('New user created!', 'Registration successful.');
         } else {
           res.errors.forEach(element => {
-            switch(element.code) {
+            switch (element.code) {
               case 'DuplicateUserName':
-                this.toastr.error('Username is already taken', 'Registration failed.');
+                this.toastr.error(
+                  'Username is already taken',
+                  'Registration failed.'
+                );
                 break;
 
               default:
                 this.toastr.error(element.description, 'Registration failed.');
                 break;
-
             }
-          })
+          });
         }
       },
       err => {
         console.log(err);
-      });
+      }
+    );
   }
 }
